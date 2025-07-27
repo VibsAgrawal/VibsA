@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV - Vibs A.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Subtle Accents -->
+    <!-- Application Structure Plan: A single-page, multi-section layout is chosen for its narrative flow, mimicking a user scrolling through a story. The structure starts with a strong 'Hero' section (Summary), followed by a 'Timeline' for chronological experiences (Professional, Teaching), a 'Skills' section with interactive elements, and finally 'Logistics'. This top-down approach is intuitive, guides the user through the candidate's journey, and allows for easy scanning. Navigation buttons at the top allow users to jump to specific sections, providing both linear and non-linear exploration paths. The goal is to present a professional story that is both comprehensive and easy to navigate. -->
+    <!-- Visualization & Content Choices: 
+        - Summary/Hero: Goal: Inform/Engage. Method: Large, clean typography on a card layout. Interaction: None, it's the main hook. Justification: Creates a strong first impression.
+        - Experience Timeline: Goal: Show change/progression. Method: A vertical timeline built with HTML/Tailwind. Interaction: Hover effects on timeline items to draw attention. Justification: Visually represents career progression more effectively than a simple list.
+        - Skills Section: Goal: Organize/Inform. Method: A grid of skill cards using HTML/Tailwind. Interaction: Clicking a skill card could reveal more detail (though not implemented in this version to maintain simplicity). Justification: A grid is a clean, modern way to present a portfolio of skills.
+        - Availability/Logistics: Goal: Inform. Method: Simple, clear text cards. Interaction: None. Justification: Presents practical information clearly and concisely.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* Warm neutral background */
+            color: #4A4A4A;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #D35400; /* Subtle accent color */
+            border-bottom-color: #D35400;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.8rem;
+            top: 0.5rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: #E5E7EB;
+            border-radius: 9999px;
+            border: 4px solid #FDFBF8;
+        }
+        .timeline-item:hover::before {
+            background-color: #D35400;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="app-container" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Header & Navigation -->
+        <header class="flex justify-between items-center py-4 mb-8 sticky top-0 bg-opacity-80 backdrop-blur-md z-10">
+            <h1 class="text-2xl font-bold text-gray-800">Vibs A.</h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#summary" class="nav-link active">Summary</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Section 1: Summary -->
+            <section id="summary" class="mb-16 scroll-mt-24">
+                <div class="card p-8 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">A Passionate Educator & Technologist</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Highly experienced professional with a a deep-seated commitment to education. With a Bachelor's and Master's degree in Engineering, I bring a unique blend of technical expertise and pedagogical skill. Currently working in the state government and as a visiting lecturer at UWA, I am seeking a part-time teaching role to leverage my extensive experience in nurturing young minds and contribute to student success. I hold a current Working With Children Check and am a dedicated scout leader, demonstrating a consistent history of positive engagement with children and teenagers.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 2: Experience Timeline -->
+            <section id="experience" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center mb-12">My Journey</h2>
+                <div class="relative pl-10 border-l-2 border-gray-200">
+                    
+                    <!-- Professional Experience -->
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Manager</h3>
+                        <p class="text-md font-medium text-gray-600">State Government, Perth, WA | May 2025 – Present</p>
+                        <p class="mt-2 text-gray-700">Change Management, leadership</p>
+                    </div>
+
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Data Science Manager</h3>
+                        <p class="text-md font-medium text-gray-600">Deloitte, Perth, WA | Nov 2021 – Oct 2024</p>
+                        <p class="mt-2 text-gray-700">Applied Mathematical Algorithms</p>
+                    </div>
+
+                    <!-- Teaching & Mentoring Experience -->
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Visiting Lecturer</h3>
+                        <p class="text-md font-medium text-gray-600">University of Western Australia (UWA) | Mar 2024 – Present</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Deliver lectures and facilitate discussions for university students.</li>
+                            <li>Contribute to the development of an Applied AI unit.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Guest Lecturer (Science)</h3>
+                        <p class="text-md font-medium text-gray-600">Public Senior High School, Perth | 2024</p>
+                        <p class="mt-2 text-gray-700">Taught senior high school students, demonstrating ability to engage and educate this age group.</p>
+                    </div>
+
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Scout Leader</h3>
+                        <p class="text-md font-medium text-gray-600">Tuart Hill Yokine Scouts | Feb 2023 – Mar 2024</p>
+                        <p class="mt-2 text-gray-700">Mentor and guide young people in various activities, fostering teamwork, leadership, and personal development.</p>
+                    </div>
+
+                    <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Math & Science Teacher</h3>
+                        <p class="text-md font-medium text-gray-600">Various Coaching Institutes, India | Jan 2000 – Jul 2018</p>
+                        <p class="mt-2 text-gray-700">Math & Science tutoring to students from year 2 to year 12</p>
+                    </div>
+
+                    <!-- Education -->
+                     <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Master of Engineering</h3>
+                        <p class="text-md font-medium text-gray-600">BITS Pilani, India | 2017</p>
+                    </div>
+                     <div class="mb-12 timeline-item">
+                        <h3 class="text-xl font-bold text-gray-800">Bachelor of Engineering</h3>
+                        <p class="text-md font-medium text-gray-600">UPTU, India | 2007</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Qualifications & Skills -->
+            <section id="skills" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-center mb-12">Core Competencies</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Pedagogical Skills</h3>
+                        <p class="text-gray-700">Strong ability to explain complex concepts clearly and adapt teaching methods to diverse learning styles.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Youth Engagement</h3>
+                        <p class="text-gray-700">Proven track record of positive engagement with children and teenagers through teaching and scouting.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Technical Expertise</h3>
+                        <p class="text-gray-700">Background in Engineering and IT, with specific expertise in Data Science Algorthms & Applied Math</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Communication</h3>
+                        <p class="text-gray-700">Excellent interpersonal and communication skills, essential for effective teaching and collaboration.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Certified & Cleared</h3>
+                        <p class="text-gray-700">Holds a current Working With Children Check and is an Australian Citizen.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Proficiencies</h3>
+                        <p class="text-gray-700">Proficient in Microsoft Office Suite</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Availability & Contact -->
+            <section id="contact" class="scroll-mt-24">
+                 <h2 class="text-3xl font-bold text-center mb-12">Availability & Contact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                   <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Availability</h3>
+                        <p class="text-gray-700">Available for teaching roles during evenings and on weekends.</p>
+                    </div>
+                     <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-2">Logistics & Contact</h3>
+                        <p class="text-gray-700">Based in Osborne Park, willing to travel across the Perth metro area.</p>
+                        <p class="mt-4 font-medium text-gray-800">0476779285</p>
+                        <p class="font-medium text-gray-800">vaibhavagrawal@outlook.com</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.6 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
